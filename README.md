@@ -63,7 +63,7 @@ l'écran d'accueil. L'accès reste privé : seul ton compte Tailscale entre.
 
 Bouton **Thème → Modules facultatifs**, à ajouter ou retirer quand tu veux :
 
-- **Discussion avec une IA** : pose des questions sur tes dépenses et ton épargne, avec le modèle de ton choix (un
+- **Mode IA** : pose des questions sur tes dépenses et ton épargne, avec le modèle de ton choix (un
   agent comme Claude Code ou Mistral Vibe avec ton abonnement, un service en ligne avec ta clé, ou Ollama sur
   l'ordinateur). Il peut proposer de recatégoriser des opérations ou d'ajouter une règle ; rien ne change avant ta
   validation.
