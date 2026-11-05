@@ -35,8 +35,7 @@ Pour l'arrêter : bouton **Thème** (en haut à droite) → **Arrêter Budget**.
    S'il n'y a pas de Python 3.12, environ 20 Mo sont téléchargés, une seule fois.
 
 Un raccourci **Budget** est créé sur le Bureau et dans le menu Démarrer. Pour l'arrêter : bouton **Thème** →
-**Arrêter Budget**. On le désinstalle depuis **Paramètres → Applications** ; tes données restent dans
-`%LOCALAPPDATA%\Programs\Budget\donnees`.
+**Arrêter Budget**. On le désinstalle depuis **Paramètres → Applications** ; tes données restent dans `Documents\Données Budget`.
 
 ## Ce que fait Budget
 
@@ -77,6 +76,12 @@ données et tes modules sont gardés. Pas besoin de retélécharger l'applicatio
 
 ## Tes données
 
-Tout reste sur ton ordinateur : dans `~/Library/Application Support/Budget/app/donnees` (Mac) ou
-`%LOCALAPPDATA%\Programs\Budget\donnees` (Windows). Rien ne part ailleurs, sauf ce que tu choisis : la lecture de ton
-compte Finary si tu ajoutes ce module, et tes questions au service en ligne que tu choisis dans la Discussion.
+Tout ce qui est à toi est dans un dossier visible : **`Documents/Données Budget`**. L'application ne contient que du
+code : la mettre à jour, la réinstaller ou la désinstaller ne touche jamais ce dossier. Un `README.md` y explique
+chaque élément. Pour sauvegarder ton budget, copie ce dossier.
+
+Pour le déplacer, ou reprendre un dossier de données sur un autre ordinateur : bouton **Thème → Données → Changer de
+dossier**. Un dossier qui a déjà des données de Budget est pris tel quel ; un dossier vide reçoit les tiennes.
+
+Rien ne part ailleurs, sauf ce que tu choisis : la lecture de ton compte Finary si tu ajoutes ce module, et tes
+questions au service en ligne que tu choisis dans la Discussion.
