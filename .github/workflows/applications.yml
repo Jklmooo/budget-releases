@@ -1,0 +1,47 @@
+# Applications à télécharger, jointes à chaque version publiée (scripts/publier.sh) : Budget.dmg (Mac) et
+# Budget-Setup.exe (Windows). Elles sont fabriquées à partir du budget.zip de cette version, qui contient aussi les
+# scripts de fabrication (coquille/). Liens stables : https://github.com/<dépôt>/releases/latest/download/Budget.dmg
+name: Applications
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Étiquette de la version (ex. v2026.11.05-1430)"
+        required: true
+permissions:
+  contents: write
+env:
+  GH_TOKEN: ${{ github.token }}
+  VERSION: ${{ github.event.release.tag_name || inputs.version }}
+jobs:
+  mac:
+    runs-on: macos-latest
+    steps:
+      - name: Paquet de la version
+        run: |
+          gh release download "$VERSION" --repo "$GITHUB_REPOSITORY" --pattern budget.zip
+          unzip -q budget.zip
+      - name: Budget.app et Budget.dmg
+        run: budget/coquille/mac/fabriquer.sh budget.zip dist
+      - name: Joindre à la version
+        run: gh release upload "$VERSION" dist/Budget.dmg --repo "$GITHUB_REPOSITORY" --clobber
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: Paquet de la version
+        shell: pwsh
+        run: |
+          gh release download "$env:VERSION" --repo "$env:GITHUB_REPOSITORY" --pattern budget.zip
+          Expand-Archive budget.zip -DestinationPath .
+      - name: Budget-Setup.exe
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress; }
+          & $iscc "/DSource=$PWD\budget" "/DVersion=$env:VERSION" budget\coquille\windows\budget.iss
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Joindre à la version
+        shell: pwsh
+        run: gh release upload "$env:VERSION" budget\dist\Budget-Setup.exe --repo "$env:GITHUB_REPOSITORY" --clobber
